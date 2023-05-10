@@ -8,10 +8,75 @@
 </head>
 <body>
 
-<h1>プロダクト管理システム</h1>
+<h1>商品管理システム</h1>
 
 <br>
 
+<div class="container">
+
+<div class="form-container">
+    <div><b>追加</b></div>
+    <br>
+    <form method="post" action="/addProduct">
+        <table>
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td><label for="price">Price:</label></td>
+                <td><input type="number" id="price" name="price" required></td>
+            </tr>
+        </table>
+        <br>
+        <div><button type="submit">追加</button></div>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <div><b>更新</b></div>
+    <br>
+    <form method="post" action="/addProduct">
+        <table>
+            <tr>
+                <td><label for="id">ID:</label></td>
+                <td><input type="text" id="id" name="id" required></td>
+            </tr>
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td><label for="price">Price:</label></td>
+                <td><input type="number" id="price" name="price" required></td>
+            </tr>
+        </table>
+        <br>
+        <div><button type="submit">追加</button></div>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <div><b>削除</b></div>
+    <br>
+    <form method="post" action="/addProduct">
+        <table>
+            <tr>
+                <td><label for="id">ID:</label></td>
+                <td><input type="text" id="id" name="id" required></td>
+            </tr>
+        </table>
+        <br>
+        <div><button type="submit">追加</button></div>
+    </form>
+</div>
+<div class="table-container">
+    <div><b>商品一覧</b></div>
+    <br>
 <table>
     <tr class="tr">
         <th>ID</th>
@@ -24,6 +89,10 @@
         <td th:text="${product.price}"></td>
     </tr>
 </table>
+</div>
+
+</div>
+
 
 </body>
 </html>

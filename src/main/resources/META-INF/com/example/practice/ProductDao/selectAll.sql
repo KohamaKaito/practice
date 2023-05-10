@@ -1,1 +1,1 @@
-select /*%expand*/* from product order by id asc
+select * from product order by id asc
