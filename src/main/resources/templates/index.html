@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Topページ</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+
 <body>
-    <h1>hello world</h1>
+<h1>Topページ</h1>
+
+<br>
+<br>
+
+<!-- プロダクト管理システムへのリンク -->
+<div><a href="/product">プロダクト管理システム</a></div>
 </body>
 </html>

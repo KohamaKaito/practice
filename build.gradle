@@ -33,6 +33,9 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//　Domaのインストール
+	implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.4.0'
+	annotationProcessor 'org.seasar.doma:doma-processor:2.35.0'
 }
 
 tasks.named('test') {

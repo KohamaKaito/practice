@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+
+<h1>プロダクト管理システム</h1>
+
+<br>
+
+<table>
+    <tr class="tr">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr class="tr" th:each="product : ${productList}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
