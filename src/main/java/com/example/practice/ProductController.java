@@ -20,7 +20,7 @@ public class ProductController {
     @GetMapping("/product")
     public String productList(Model model) {
         List<ProductEntity> productList = productDao.selectAll();
-        model.addAttribute("userList", productList);
+        model.addAttribute("productList", productList);
         return "product";
     }
 }
