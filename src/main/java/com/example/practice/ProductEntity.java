@@ -1,22 +1,16 @@
 package com.example.practice;
 
 import lombok.Data;
-
-import javax.persistence.*;
+import org.seasar.doma.Entity;
+import org.seasar.doma.Id;
 
 @Entity
-@Data
-@Table(name = "product")
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    public int id;
 
-    @Column(name = "name")
-    private String name;
+    public String name;
 
-    @Column(name = "price")
-    private int price;
+    public int price;
 
 }

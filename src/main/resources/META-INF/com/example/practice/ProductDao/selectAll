@@ -1,0 +1,1 @@
+select /*%expand*/* from product order by id asc
