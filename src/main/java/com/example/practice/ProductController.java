@@ -11,6 +11,7 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductDao productDao;
+    private ProductService productService = new ProductService();
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -19,7 +20,8 @@ public class ProductController {
 
     @GetMapping("/product")
     public String productList(Model model) {
-        List<ProductEntity> productList = productDao.selectAll();
+        // productServiceを介してリストを生成
+        List<ProductEntity> productList = productService.getProductList();
         model.addAttribute("productList", productList);
         return "product";
     }
