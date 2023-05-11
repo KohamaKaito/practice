@@ -5,9 +5,8 @@ import java.util.List;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
-import org.seasar.doma.Sql;
+import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
-import org.springframework.data.repository.query.Param;
 
 
 @Dao
@@ -18,9 +17,17 @@ public interface ProductDao {
     @Select
     List<ProductEntity> selectAll();
 
+    // 特定のレコードを取得
+    @Select
+    ProductEntity selectProductById(Integer id);
+
     // データベースに追加
     @Insert(excludeNull = true)
-    int insert(ProductEntity product);
+    int insertProduct(ProductEntity product);
+
+    // データベースを更新
+    @Update
+    int updateProduct(ProductEntity product);
 }
 
 

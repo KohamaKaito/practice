@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -27,7 +28,7 @@ public class ProductController {
     //
     @RequestMapping("/product")
     public String showProduct(Model model) {
-        List<ProductEntity> productList = productService.getProductList();
+        List<ProductEntity> productList = productService.selectProduct();
         model.addAttribute("productList", productList);
         return "product";
     }
@@ -36,8 +37,18 @@ public class ProductController {
     // Viewから受け取った値をデータベースに追加するメソッド
     //
     @PostMapping("/insertProduct")
-    public String insertProduct(@RequestParam("name") String name, @RequestParam("price") int price,Model model){
-        productService.insertProduct(name,price);
+    public String insertProduct(@RequestParam("name") String name, @RequestParam("price") int price, Model model) {
+        productService.insertProduct(name, price);
+        showProduct(model);
+        return "product";
+    }
+
+    //
+    // Viewから受け取った値でデータベースを更新するメソッド
+    //
+    @PostMapping("/updateProduct")
+    public String updateProduct(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("price") int price, Model model) {
+        productService.updateProduct(id, name, price);
         showProduct(model);
         return "product";
     }
