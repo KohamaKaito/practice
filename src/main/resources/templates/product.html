@@ -20,11 +20,11 @@
     <form method="post" action="/addProduct">
         <table>
             <tr>
-                <td><label for="name">Name:</label></td>
+                <td><label class="label" for="name">名前:</label></td>
                 <td><input type="text" id="name" name="name" required></td>
             </tr>
             <tr>
-                <td><label for="price">Price:</label></td>
+                <td><label for="price">価格:</label></td>
                 <td><input type="number" id="price" name="price" required></td>
             </tr>
         </table>
@@ -45,16 +45,16 @@
                 <td><input type="text" id="id" name="id" required></td>
             </tr>
             <tr>
-                <td><label for="name">Name:</label></td>
+                <td><label for="name">名前:</label></td>
                 <td><input type="text" id="name" name="name" required></td>
             </tr>
             <tr>
-                <td><label for="price">Price:</label></td>
+                <td><label for="price">価格:</label></td>
                 <td><input type="number" id="price" name="price" required></td>
             </tr>
         </table>
         <br>
-        <div><button type="submit">追加</button></div>
+        <div><button type="submit">更新</button></div>
     </form>
 
     <br>
@@ -71,7 +71,7 @@
             </tr>
         </table>
         <br>
-        <div><button type="submit">追加</button></div>
+        <div><button type="submit">削除</button></div>
     </form>
 </div>
 <div class="table-container">
@@ -80,8 +80,8 @@
 <table>
     <tr class="tr">
         <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
+        <th>名前</th>
+        <th>価格</th>
     </tr>
     <tr class="tr" th:each="product : ${productList}">
         <td th:text="${product.id}"></td>
