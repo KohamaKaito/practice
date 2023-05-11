@@ -10,19 +10,35 @@ import java.util.List;
 @Controller
 public class ProductController {
 
+    // サービスのインスタンス生成
     @Autowired
     private ProductService productService;
 
+    //
+    // ルートURLがリクエストされた時にindex.htmlを表示するメソッド
+    //
     @RequestMapping("/")
     public String index(Model model) {
         return "index";
     }
 
-    @GetMapping("/product")
-    public String productList(Model model) {
-        // productServiceを介してリストを生成
+    //
+    // データベースから商品一覧を取得してViewに渡すメソッド
+    //
+    @RequestMapping("/product")
+    public String showProduct(Model model) {
         List<ProductEntity> productList = productService.getProductList();
         model.addAttribute("productList", productList);
+        return "product";
+    }
+
+    //
+    // Viewから受け取った値をデータベースに追加するメソッド
+    //
+    @PostMapping("/insertProduct")
+    public String insertProduct(@RequestParam("name") String name, @RequestParam("price") int price,Model model){
+        productService.insertProduct(name,price);
+        showProduct(model);
         return "product";
     }
 }
