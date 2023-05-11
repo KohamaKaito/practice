@@ -9,9 +9,9 @@ import java.util.List;
 
 @Controller
 public class ProductController {
+
     @Autowired
-    private ProductDao productDao;
-    private ProductService productService = new ProductService();
+    private ProductService productService;
 
     @RequestMapping("/")
     public String index(Model model) {
