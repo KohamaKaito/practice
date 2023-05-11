@@ -41,4 +41,12 @@ public class ProductService {
         productDao.updateProduct(oldProduct);
     }
 
+    //
+    // データベースにデータを削除するメソッド
+    //
+    public void deleteProduct(int id) {
+        ProductEntity product = productDao.selectProductById(id);
+        productDao.deleteProduct(product);
+    }
+
 }

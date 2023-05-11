@@ -52,4 +52,14 @@ public class ProductController {
         showProduct(model);
         return "product";
     }
+
+    //
+    // Viewから受け取った値でデータベースを削除するメソッド
+    //
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam("id") int id, Model model) {
+        productService.deleteProduct(id);
+        showProduct(model);
+        return "product";
+    }
 }
