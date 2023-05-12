@@ -1,10 +1,22 @@
 package com.example.practice;
 
-import org.seasar.doma.*;
+import lombok.Data;
+import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.Id;
+import org.seasar.doma.Table;
+import org.seasar.doma.GenerationType;
+import org.seasar.doma.Column;
 
-
+/**
+ * ProductEntityクラス
+ * レコードに対応するオブジェクトクラス
+ *
+ * @author kohama
+ */
 @Entity
 @Table(name = "product")
+@Data
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,24 +28,4 @@ public class ProductEntity {
 
     @Column(name = "price")
     private int price;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getPrice() {
-        return this.price;
-    }
 }
