@@ -62,7 +62,6 @@ public class ProductController {
     @PostMapping("/product/insert")
     public String insertProduct(@RequestParam("insertName") String name, @RequestParam("insertPrice") int price, Model model) {
         productService.insertProduct(name, price);
-        showProduct(model);
         return "redirect:/product";
     }
 
@@ -79,7 +78,6 @@ public class ProductController {
     @PostMapping("/product/update")
     public String updateProduct(@RequestParam("updateId") int id, @RequestParam("updateName") String name, @RequestParam("updatePrice") int price, Model model) {
         productService.updateProduct(id, name, price);
-        showProduct(model);
         return "redirect:/product";
     }
 
@@ -94,7 +92,6 @@ public class ProductController {
     @PostMapping("/product/delete")
     public String deleteProduct(@RequestParam("deleteId") int id, Model model) {
         productService.deleteProduct(id);
-        showProduct(model);
         return "redirect:/product";
     }
 
