@@ -33,7 +33,7 @@ public interface ProductDao {
      * selectProductByIdメソッド
      * 特定のレコードをIDで受け取るメソッド
      *
-     * @param id 取得したいメソッド
+     * @param id 取得したいレコードのid
      * @return レコードのオブジェクト
      */
     @Select
@@ -63,7 +63,7 @@ public interface ProductDao {
      * deleteProductメソッド
      * データベースのレコードを削除するメソッド
      *
-     * @param id 更新したいid
+     * @param id 更新したいレコードのid
      * @return
      */
     @Delete(sqlFile = true)
