@@ -3,6 +3,7 @@ package com.example.practice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class ProductController {
      * @param model Viewに渡されるデータを保持するオブジェクト
      * @return product.html
      */
-    @RequestMapping("/product")
+    @GetMapping("/product")
     public String showProduct(Model model) {
         List<ProductEntity> productList = productService.selectProduct();
         model.addAttribute("productList", productList);
@@ -62,7 +63,7 @@ public class ProductController {
     public String insertProduct(@RequestParam("insertName") String name, @RequestParam("insertPrice") int price, Model model) {
         productService.insertProduct(name, price);
         showProduct(model);
-        return "product";
+        return "redirect:/product";
     }
 
     /**
@@ -79,7 +80,7 @@ public class ProductController {
     public String updateProduct(@RequestParam("updateId") int id, @RequestParam("updateName") String name, @RequestParam("updatePrice") int price, Model model) {
         productService.updateProduct(id, name, price);
         showProduct(model);
-        return "product";
+        return "redirect:/product";
     }
 
     /**
@@ -94,7 +95,7 @@ public class ProductController {
     public String deleteProduct(@RequestParam("deleteId") int id, Model model) {
         productService.deleteProduct(id);
         showProduct(model);
-        return "product";
+        return "redirect:/product";
     }
 
 }
