@@ -20,15 +20,15 @@
         <!-- 追加フォーム -->
         <div><b>追加</b></div>
         <br>
-        <form method="post" action="/insertProduct">
+        <form method="post" action="/product/insert">
             <table>
                 <tr>
-                    <td><label class="label" for="name">名前:</label></td>
-                    <td><input type="text" id="name" name="name" required></td>
+                    <td><label class="label" for="insertName">名前:</label></td>
+                    <td><input type="text" id="insertName" name="insertName" required></td>
                 </tr>
                 <tr>
-                    <td><label for="price">価格:</label></td>
-                    <td><input type="number" id="price" name="price" required></td>
+                    <td><label for="insertPrice">価格:</label></td>
+                    <td><input type="number" id="insertPrice" name="insertPrice" required></td>
                 </tr>
             </table>
             <br>
@@ -44,19 +44,19 @@
         <!-- 更新フォーム -->
         <div><b>更新</b></div>
         <br>
-        <form method="post" action="/updateProduct">
+        <form method="post" action="/product/update">
             <table>
                 <tr>
-                    <td><label for="id">ID:</label></td>
-                    <td><input type="text" id="id" name="id" required></td>
+                    <td><label for="updateId">ID:</label></td>
+                    <td><input type="text" id="updateId" name="updateId" required></td>
                 </tr>
                 <tr>
-                    <td><label for="name">名前:</label></td>
-                    <td><input type="text" id="name" name="name" required></td>
+                    <td><label for="updateName">名前:</label></td>
+                    <td><input type="text" id="updateName" name="updateName" required></td>
                 </tr>
                 <tr>
-                    <td><label for="price">価格:</label></td>
-                    <td><input type="number" id="price" name="price" required></td>
+                    <td><label for="updatePrice">価格:</label></td>
+                    <td><input type="number" id="updatePrice" name="updatePrice" required></td>
                 </tr>
             </table>
             <br>
@@ -72,11 +72,11 @@
         <!-- 削除フォーム -->
         <div><b>削除</b></div>
         <br>
-        <form method="post" action="/deleteProduct">
+        <form method="post" action="/product/delete">
             <table>
                 <tr>
-                    <td><label for="id">ID:</label></td>
-                    <td><input type="text" id="id" name="id" required></td>
+                    <td><label for="deleteId">ID:</label></td>
+                    <td><input type="text" id="deleteId" name="deleteId" required></td>
                 </tr>
             </table>
             <br>
@@ -99,9 +99,9 @@
                 <th>価格</th>
             </tr>
             <tr class="tr" th:each="product : ${productList}">
-                <td th:text="${product.getId}"></td>
-                <td th:text="${product.getName}"></td>
-                <td th:text="${product.getPrice}"></td>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
             </tr>
         </table>
     </div>
