@@ -1,1 +1,1 @@
-SELECT * FROM product WHERE id = /* id */1
+SELECT * FROM product WHERE id = /* id */''
