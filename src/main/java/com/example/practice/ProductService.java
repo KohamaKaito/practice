@@ -40,8 +40,7 @@ public class ProductService {
      */
     public void insertProduct(String name, int price) {
         ProductEntity product = new ProductEntity();
-        product.setName(name);
-        product.setPrice(price);
+        setProductEntity(product, name, price);
         productDao.insertProduct(product);
     }
 
@@ -60,7 +59,7 @@ public class ProductService {
         if (productEntity == null) {
         }
         // entityに値をセット
-        setUpdateEntity(productEntity, name, price);
+        setProductEntity(productEntity, name, price);
         // 更新処理
         productDao.updateProduct(productEntity);
     }
@@ -85,7 +84,7 @@ public class ProductService {
      * @param name          新しいname
      * @param price         新しいprice
      */
-    private void setUpdateEntity(ProductEntity productEntity, String name, int price) {
+    private void setProductEntity(ProductEntity productEntity, String name, int price) {
         productEntity.setName(name);
         productEntity.setPrice(price);
     }
