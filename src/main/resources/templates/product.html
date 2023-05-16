@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,50 @@
 </head>
 <body>
 
+<!--
+<table>
+    <tr th:if="${validationError}" th:each="error : ${validationError}">
+        <td style="color: red;" th:text="${error}"></td>
+    </tr>
+</table>
+
+<h1>ユーザー新規登録</h1>
+<form th:action="@{/user/create}" th:object="${userRequest}"
+      th:method="post">
+    <table>
+        <tr>
+            <th class="cell_title">名前</th>
+            <th class="cell_required">※</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th class="cell_title">住所</th>
+            <th class="cell_required"></th>
+            <td><input type="text" th:field="*{address}"></td>
+        </tr>
+        <tr>
+            <th class="cell_title">電話番号</th>
+            <th class="cell_required">※</th>
+            <td><input type="text" th:field="*{phone}"></td>
+        </tr>
+    </table>
+    <div class="btn_area_center">
+        <input type="submit" value="登録" class="btn">
+    </div>
+</form>
+-->
+
+
+
 <h1>商品管理システム</h1>
+
+<br>
+
+<table border="2" style="border-collapse: collapse; border-color: red">
+    <tr th:if="${validationError}" th:each="error : ${validationError}">
+        <td style="color: red;" th:text="${error}"></td>
+    </tr>
+</table>
 
 <br>
 
@@ -20,15 +64,17 @@
         <!-- 追加フォーム -->
         <div><b>追加</b></div>
         <br>
-        <form method="post" action="/product/insert">
+        <form th:action="@{/product/insert}" th:object="${productInsertForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label class="label" for="insertName">名前:</label></td>
-                    <td><input type="text" id="insertName" name="insertName" required></td>
+                    <td>名前:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td><div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div></td>
                 </tr>
                 <tr>
-                    <td><label for="insertPrice">価格:</label></td>
-                    <td><input type="number" id="insertPrice" name="insertPrice" required></td>
+                    <td>価格:</td>
+                    <td><input type="text" th:field="*{price}" /></td>
+                    <td><div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div></td>
                 </tr>
             </table>
             <br>
@@ -40,6 +86,7 @@
         <br>
         <hr>
         <br>
+
 
         <!-- 更新フォーム -->
         <div><b>更新</b></div>

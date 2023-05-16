@@ -3,12 +3,15 @@ package com.example.practice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ProductControllerクラス
@@ -47,6 +50,7 @@ public class ProductController {
     public String showProduct(Model model) {
         List<ProductEntity> productList = productService.selectProduct();
         model.addAttribute("productList", productList);
+        model.addAttribute("productInsertForm", new ProductInsertForm());
         return "product";
     }
 
@@ -60,8 +64,38 @@ public class ProductController {
      * @return product.html
      */
     @PostMapping("/product/insert")
-    public String insertProduct(@RequestParam("insertName") String name, @RequestParam("insertPrice") int price, Model model) {
-        productService.insertProduct(name, price);
+    public String insertProduct(@Validated @ModelAttribute ProductInsertForm form, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            System.out.println("error");
+            List<String> errorList = new ArrayList<String>();
+            for(ObjectError error:result.getAllErrors()){
+                errorList.add(error.getDefaultMessage());
+                System.out.println(error.getDefaultMessage());
+            }
+            List<ProductEntity> productList = productService.selectProduct();
+            model.addAttribute("productList", productList);
+            model.addAttribute("productInsertForm", new ProductInsertForm());
+            model.addAttribute("validationError", errorList);
+            return "product";
+        }
+        System.out.println(form.getName());
+        System.out.println(form.getPrice());
+        productService.insertProduct(form.getName(), Integer.parseInt(form.getPrice()));
+        List<ProductEntity> productList = productService.selectProduct();
+        model.addAttribute("productList", productList);
+        model.addAttribute("productInsertForm", new ProductInsertForm());
+
+        return "product";
+    }
+
+    @RequestMapping(value = "/product/submitInsertForm", method = RequestMethod.POST)
+    public String submitInsertForm(@Validated @ModelAttribute ProductInsertForm form, BindingResult result, Model model){
+
+        model.addAttribute("productInsertForm", new ProductInsertForm());
+        if(result.hasErrors()){
+            // バリデーションエラーがある場合の処理
+            return "redirect:/product";
+        }
         return "redirect:/product";
     }
 
@@ -94,5 +128,6 @@ public class ProductController {
         productService.deleteProduct(id);
         return "redirect:/product";
     }
+
 
 }
