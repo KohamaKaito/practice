@@ -1,18 +1,21 @@
 package com.example.practice;
 
 import lombok.Data;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Data
-public class ProductInsertForm implements Serializable {
+public class ProductUpdateForm implements Serializable {
+
+    // id
+    @Pattern(regexp = "^[0-9]+$", message = "エラー：IDに半角数字以外は入力できません")
+    @NotEmpty(message = "エラー：IDを入力してください")
+    private String id;
 
     // name
     @Pattern(regexp = "^[^０-９ａ-ｚＡ-Ｚ]+$", message = "エラー：名前に全角英数字は入力できません")

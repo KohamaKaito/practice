@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * ProductControllerクラス
@@ -23,16 +25,12 @@ import java.util.Objects;
 @Controller
 public class ProductController {
 
-    // サービスのインスタンス生成
     @Autowired
     private ProductService productService;
 
     /**
      * indexメソッド
      * ルートURLがリクエストされた時にindex.htmlを表示するメソッド
-     *
-     * @param model Viewに渡されるデータを保持するオブジェクト
-     * @return index.html
      */
     @RequestMapping("/")
     public String index(Model model) {
@@ -42,92 +40,80 @@ public class ProductController {
     /**
      * showProductメソッド
      * 商品一覧を取得してViewに渡すメソッド
-     *
-     * @param model Viewに渡されるデータを保持するオブジェクト
-     * @return product.html
      */
     @GetMapping("/product")
     public String showProduct(Model model) {
         List<ProductEntity> productList = productService.selectProduct();
         model.addAttribute("productList", productList);
         model.addAttribute("productInsertForm", new ProductInsertForm());
+        model.addAttribute("productUpdateForm", new ProductUpdateForm());
+        model.addAttribute("productDeleteForm", new ProductDeleteForm());
         return "product";
     }
 
     /**
      * insertProductメソッド
      * Viewから受け取った値をデータベースに追加するメソッド
-     *
-     * @param name  追加したい名前
-     * @param price 追加したい価格
-     * @param model Viewに渡されるデータを保持するオブジェクト
-     * @return product.html
      */
     @PostMapping("/product/insert")
-    public String insertProduct(@Validated @ModelAttribute ProductInsertForm form, BindingResult result, Model model) {
-        if(result.hasErrors()){
-            System.out.println("error");
+    public String insertProduct(@Validated @ModelAttribute ProductInsertForm form, BindingResult result, Model model, RedirectAttributes ra) {
+        // エラーが発生した際の処理
+        if (result.hasErrors()) {
             List<String> errorList = new ArrayList<String>();
-            for(ObjectError error:result.getAllErrors()){
+            for (ObjectError error : result.getAllErrors()) {
                 errorList.add(error.getDefaultMessage());
-                System.out.println(error.getDefaultMessage());
             }
-            List<ProductEntity> productList = productService.selectProduct();
-            model.addAttribute("productList", productList);
-            model.addAttribute("productInsertForm", new ProductInsertForm());
-            model.addAttribute("validationError", errorList);
-            return "product";
-        }
-        System.out.println(form.getName());
-        System.out.println(form.getPrice());
-        productService.insertProduct(form.getName(), Integer.parseInt(form.getPrice()));
-        List<ProductEntity> productList = productService.selectProduct();
-        model.addAttribute("productList", productList);
-        model.addAttribute("productInsertForm", new ProductInsertForm());
-
-        return "product";
-    }
-
-    @RequestMapping(value = "/product/submitInsertForm", method = RequestMethod.POST)
-    public String submitInsertForm(@Validated @ModelAttribute ProductInsertForm form, BindingResult result, Model model){
-
-        model.addAttribute("productInsertForm", new ProductInsertForm());
-        if(result.hasErrors()){
-            // バリデーションエラーがある場合の処理
+            // リダイレクト先にエラー情報を送る
+            ra.addFlashAttribute("validationError", errorList);
             return "redirect:/product";
         }
+        // エラーがなければ追加
+        productService.insertProduct(form.getName(), Integer.parseInt(form.getPrice()));
         return "redirect:/product";
     }
+
 
     /**
      * updateProductメソッド
      * Viewから受け取った値でデータベースを更新するメソッド
-     *
-     * @param id    更新対象のid
-     * @param name  更新したい名前
-     * @param price 更新したい価格
-     * @param model Viewに渡されるデータを保持するオブジェクト
-     * @return product.html
      */
     @PostMapping("/product/update")
-    public String updateProduct(@RequestParam("updateId") int id, @RequestParam("updateName") String name, @RequestParam("updatePrice") int price, Model model) {
-        productService.updateProduct(id, name, price);
+    public String updateProduct(@Validated @ModelAttribute ProductUpdateForm form, BindingResult result, Model model, RedirectAttributes ra) {
+        // エラーが発生した際の処理
+        if (result.hasErrors()) {
+            List<String> errorList = new ArrayList<String>();
+            for (ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+            // リダイレクト先にエラー情報を送る
+            ra.addFlashAttribute("validationError", errorList);
+            return "redirect:/product";
+        }
+        // エラーがなければ更新
+        productService.updateProduct(Integer.parseInt(form.getId()), form.getName(), Integer.parseInt(form.getPrice()));
         return "redirect:/product";
     }
 
     /**
      * deleteProductメソッド
      * Viewから受け取った値でデータベースを削除するメソッド
-     *
-     * @param id    削除対象のid
-     * @param model Viewに渡されるデータを保持するオブジェクト
-     * @return product.html
      */
     @PostMapping("/product/delete")
-    public String deleteProduct(@RequestParam("deleteId") int id, Model model) {
-        productService.deleteProduct(id);
+    public String deleteProduct(@Validated @ModelAttribute ProductDeleteForm form, BindingResult result, Model model, RedirectAttributes ra) {
+        // エラーが発生した際の処理
+        if (result.hasErrors()) {
+            List<String> errorList = new ArrayList<String>();
+            for (ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+            // リダイレクト先にエラー情報を送る
+            ra.addFlashAttribute("validationError", errorList);
+            return "redirect:/product";
+        }
+        // エラーがなければ削除
+        productService.deleteProduct(Integer.parseInt(form.getId()));
+        List<ProductEntity> productList = productService.selectProduct();
         return "redirect:/product";
     }
-
 
 }

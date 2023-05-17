@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,48 +8,15 @@
 </head>
 <body>
 
-<!--
-<table>
-    <tr th:if="${validationError}" th:each="error : ${validationError}">
-        <td style="color: red;" th:text="${error}"></td>
-    </tr>
-</table>
-
-<h1>ユーザー新規登録</h1>
-<form th:action="@{/user/create}" th:object="${userRequest}"
-      th:method="post">
-    <table>
-        <tr>
-            <th class="cell_title">名前</th>
-            <th class="cell_required">※</th>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <th class="cell_title">住所</th>
-            <th class="cell_required"></th>
-            <td><input type="text" th:field="*{address}"></td>
-        </tr>
-        <tr>
-            <th class="cell_title">電話番号</th>
-            <th class="cell_required">※</th>
-            <td><input type="text" th:field="*{phone}"></td>
-        </tr>
-    </table>
-    <div class="btn_area_center">
-        <input type="submit" value="登録" class="btn">
-    </div>
-</form>
--->
-
-
 
 <h1>商品管理システム</h1>
 
 <br>
 
-<table border="2" style="border-collapse: collapse; border-color: red">
+<!-- エラー表示 -->
+<table border="2" style="border-collapse: collapse; border-color: #ff9393">
     <tr th:if="${validationError}" th:each="error : ${validationError}">
-        <td style="color: red;" th:text="${error}"></td>
+        <td style="color: #ff9393;" th:text="${error}"></td>
     </tr>
 </table>
 
@@ -69,12 +35,10 @@
                 <tr>
                     <td>名前:</td>
                     <td><input type="text" th:field="*{name}" /></td>
-                    <td><div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div></td>
                 </tr>
                 <tr>
                     <td>価格:</td>
                     <td><input type="text" th:field="*{price}" /></td>
-                    <td><div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div></td>
                 </tr>
             </table>
             <br>
@@ -91,19 +55,19 @@
         <!-- 更新フォーム -->
         <div><b>更新</b></div>
         <br>
-        <form method="post" action="/product/update">
+        <form th:action="@{/product/update}" th:object="${productUpdateForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label for="updateId">ID:</label></td>
-                    <td><input type="text" id="updateId" name="updateId" required></td>
+                    <td>ID:</td>
+                    <td><input type="text" th:field="*{id}" /></td>
                 </tr>
                 <tr>
-                    <td><label for="updateName">名前:</label></td>
-                    <td><input type="text" id="updateName" name="updateName" required></td>
+                    <td>名前:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
                 </tr>
                 <tr>
-                    <td><label for="updatePrice">価格:</label></td>
-                    <td><input type="number" id="updatePrice" name="updatePrice" required></td>
+                    <td>価格:</td>
+                    <td><input type="text" th:field="*{price}" /></td>
                 </tr>
             </table>
             <br>
@@ -119,11 +83,11 @@
         <!-- 削除フォーム -->
         <div><b>削除</b></div>
         <br>
-        <form method="post" action="/product/delete">
+        <form th:action="@{/product/delete}" th:object="${productDeleteForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label for="deleteId">ID:</label></td>
-                    <td><input type="text" id="deleteId" name="deleteId" required></td>
+                    <td>ID:</td>
+                    <td><input type="text" th:field="*{id}" /></td>
                 </tr>
             </table>
             <br>
