@@ -14,8 +14,8 @@
 <br>
 
 <!-- エラー表示 -->
-<table th:if="${validationError != null}" border="2" style="border-collapse: collapse; border-color: #ff9393">
-    <tr th:if="${validationError != null}" th:each="error : ${validationError}">
+<table th:if="${errorList != null && #lists.size(errorList) > 0}" border="2" style="border-collapse: collapse; border-color: #ff9393">
+    <tr th:each="error : ${errorList}">
         <td style="color: #ff9393;" th:text="${error}"></td>
     </tr>
 </table>

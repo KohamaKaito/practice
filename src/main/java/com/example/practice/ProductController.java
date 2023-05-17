@@ -64,7 +64,7 @@ public class ProductController {
                 errorList.add(error.getDefaultMessage());
             }
             // リダイレクト先にエラー情報を送る
-            ra.addFlashAttribute("validationError", errorList);
+            ra.addFlashAttribute("errorList", errorList);
             return "redirect:/product";
         }
         // エラーがなければ追加
@@ -86,7 +86,7 @@ public class ProductController {
                 errorList.add(error.getDefaultMessage());
             }
             // リダイレクト先にエラー情報を送る
-            ra.addFlashAttribute("validationError", errorList);
+            ra.addFlashAttribute("errorList", errorList);
             return "redirect:/product";
         }
         // エラーがなければ更新
@@ -107,7 +107,7 @@ public class ProductController {
                 errorList.add(error.getDefaultMessage());
             }
             // リダイレクト先にエラー情報を送る
-            ra.addFlashAttribute("validationError", errorList);
+            ra.addFlashAttribute("errorList", errorList);
             return "redirect:/product";
         }
         // エラーがなければ削除
