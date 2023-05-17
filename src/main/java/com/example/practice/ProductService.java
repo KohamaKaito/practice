@@ -55,9 +55,6 @@ public class ProductService {
     @Transactional
     public void updateProduct(int id, String name, int price) {
         ProductEntity productEntity = productDao.selectProductById(id);
-        // 例外処理
-        if (productEntity == null) {
-        }
         // entityに値をセット
         setProductEntity(productEntity, name, price);
         // 更新処理
@@ -87,6 +84,22 @@ public class ProductService {
     private void setProductEntity(ProductEntity productEntity, String name, int price) {
         productEntity.setName(name);
         productEntity.setPrice(price);
+    }
+
+    /**
+     * existsIdメソッド
+     * データベースの中に任意のIDが格納されていたらtrue
+     * 格納されていなかったらfalseを返す関数
+     *
+     * @param id ID
+     * @return true/false
+     */
+    public boolean existsId(int id){
+        ProductEntity product = productDao.selectProductById(id);
+        if (product == null) {
+            return false;
+        }
+        return true;
     }
 
 }

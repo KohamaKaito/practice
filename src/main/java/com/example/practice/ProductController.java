@@ -89,6 +89,14 @@ public class ProductController {
             ra.addFlashAttribute("errorList", errorList);
             return "redirect:/product";
         }
+        // IDが存在しない際の処理
+        if(!productService.existsId(Integer.parseInt(form.getId()))){
+            List<String> errorList = new ArrayList<String>();
+            errorList.add("エラー：IDが存在しません");
+            // リダイレクト先にエラー情報を送る
+            ra.addFlashAttribute("errorList", errorList);
+            return "redirect:/product";
+        }
         // エラーがなければ更新
         productService.updateProduct(Integer.parseInt(form.getId()), form.getName(), Integer.parseInt(form.getPrice()));
         return "redirect:/product";
@@ -106,6 +114,14 @@ public class ProductController {
             for (ObjectError error : result.getAllErrors()) {
                 errorList.add(error.getDefaultMessage());
             }
+            // リダイレクト先にエラー情報を送る
+            ra.addFlashAttribute("errorList", errorList);
+            return "redirect:/product";
+        }
+        // IDが存在しない際の処理
+        if(!productService.existsId(Integer.parseInt(form.getId()))){
+            List<String> errorList = new ArrayList<String>();
+            errorList.add("エラー：IDが存在しません");
             // リダイレクト先にエラー情報を送る
             ra.addFlashAttribute("errorList", errorList);
             return "redirect:/product";
