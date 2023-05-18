@@ -11,6 +11,12 @@ import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 
+/**
+ * ProductInsertFormクラス
+ * 追加フォームに対応するオブジェクトクラス
+ *
+ * @author kohama
+ */
 @Data
 public class ProductInsertForm implements Serializable {
 
@@ -24,7 +30,7 @@ public class ProductInsertForm implements Serializable {
     // price
     @NotBlank(message = "エラー：価格を入力してください")
     @Pattern(regexp = "^[0-9]+$", message = "エラー：価格に半角数字以外は入力できません")
-    @Range(min=0, max=2147483647, message = "エラー：2147483647以内の整数で入力してください")
+    @Range(min=0, max=2147483647, message = "エラー：価格は2147483647以内の整数で入力してください")
     private String price;
 
 }

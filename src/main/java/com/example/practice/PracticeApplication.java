@@ -25,6 +25,9 @@ public class PracticeApplication extends SpringBootServletInitializer {
         SpringApplication.run(PracticeApplication.class, args);
     }
 
+    /**
+     * warファイルのデプロイ時に使用するメソッド
+     */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(PracticeApplication.class);

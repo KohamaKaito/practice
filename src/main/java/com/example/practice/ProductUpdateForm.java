@@ -9,6 +9,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
+/**
+ * ProductUpdateFormクラス
+ * 更新フォームに対応するオブジェクトクラス
+ *
+ * @author kohama
+ */
 @Data
 public class ProductUpdateForm implements Serializable {
 

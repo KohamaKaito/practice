@@ -5,6 +5,12 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+/**
+ * ProductDeleteFormクラス
+ * 削除フォームに対応するオブジェクトクラス
+ *
+ * @author kohama
+ */
 @Data
 public class ProductDeleteForm {
 
