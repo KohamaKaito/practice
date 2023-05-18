@@ -8,7 +8,18 @@
 </head>
 <body>
 
+
 <h1>商品管理システム</h1>
+
+<br>
+
+<!-- エラー表示 -->
+<table th:if="${errorList != null && #lists.size(errorList) > 0}" border="2" style="border-collapse: collapse; border-color: #ff9393">
+    <tr th:each="error : ${errorList}">
+        <td style="color: #ff9393;" th:text="${error}"></td>
+    </tr>
+</table>
+
 
 <br>
 
@@ -20,15 +31,15 @@
         <!-- 追加フォーム -->
         <div><b>追加</b></div>
         <br>
-        <form method="post" action="/product/insert">
+        <form th:action="@{/product/insert}" th:object="${productInsertForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label class="label" for="insertName">名前:</label></td>
-                    <td><input type="text" id="insertName" name="insertName" required></td>
+                    <td>名前:</td>
+                    <td><input type="text" th:field="*{name}"/></td>
                 </tr>
                 <tr>
-                    <td><label for="insertPrice">価格:</label></td>
-                    <td><input type="number" id="insertPrice" name="insertPrice" required></td>
+                    <td>価格:</td>
+                    <td><input type="text" th:field="*{price}"/></td>
                 </tr>
             </table>
             <br>
@@ -41,22 +52,23 @@
         <hr>
         <br>
 
+
         <!-- 更新フォーム -->
         <div><b>更新</b></div>
         <br>
-        <form method="post" action="/product/update">
+        <form th:action="@{/product/update}" th:object="${productUpdateForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label for="updateId">ID:</label></td>
-                    <td><input type="text" id="updateId" name="updateId" required></td>
+                    <td>ID:</td>
+                    <td><input type="text" th:field="*{id}"/></td>
                 </tr>
                 <tr>
-                    <td><label for="updateName">名前:</label></td>
-                    <td><input type="text" id="updateName" name="updateName" required></td>
+                    <td>名前:</td>
+                    <td><input type="text" th:field="*{name}"/></td>
                 </tr>
                 <tr>
-                    <td><label for="updatePrice">価格:</label></td>
-                    <td><input type="number" id="updatePrice" name="updatePrice" required></td>
+                    <td>価格:</td>
+                    <td><input type="text" th:field="*{price}"/></td>
                 </tr>
             </table>
             <br>
@@ -72,11 +84,11 @@
         <!-- 削除フォーム -->
         <div><b>削除</b></div>
         <br>
-        <form method="post" action="/product/delete">
+        <form th:action="@{/product/delete}" th:object="${productDeleteForm}" th:method="post">
             <table>
                 <tr>
-                    <td><label for="deleteId">ID:</label></td>
-                    <td><input type="text" id="deleteId" name="deleteId" required></td>
+                    <td>ID:</td>
+                    <td><input type="text" th:field="*{id}"/></td>
                 </tr>
             </table>
             <br>

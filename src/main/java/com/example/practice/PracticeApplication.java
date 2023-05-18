@@ -2,6 +2,8 @@ package com.example.practice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
  * PracticeApplication
@@ -11,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 0.0
  */
 @SpringBootApplication
-public class PracticeApplication {
+public class PracticeApplication extends SpringBootServletInitializer {
 
     /**
      * mainメソッド
@@ -21,5 +23,13 @@ public class PracticeApplication {
      */
     public static void main(String[] args) {
         SpringApplication.run(PracticeApplication.class, args);
+    }
+
+    /**
+     * warファイルのデプロイ時に使用するメソッド
+     */
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(PracticeApplication.class);
     }
 }
