@@ -28,4 +28,13 @@ public class ProductEntity {
 
     @Column(name = "price")
     private int price;
+
+    public ProductEntity(int id, String name, int price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public ProductEntity() {
+    }
 }
